@@ -60,6 +60,7 @@ dependencies {
     val daggerHiltVers = "2.49"
     val retrofitVersion = "2.9.0"
     val loggingInterceptorVersion = "5.0.0-alpha.11"
+    val viewModelComposeVer = "2.7.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -104,4 +105,8 @@ dependencies {
     //Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${viewModelComposeVer}")
+    implementation("androidx.compose.runtime:runtime-livedata:1.7.0-alpha01")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 }

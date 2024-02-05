@@ -16,11 +16,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.DialogNavigator
 import androidx.navigation.compose.NavHost
+import dagger.hilt.android.AndroidEntryPoint
 import id.rizaldo.ui.theme.GxsalesaoosTheme
 import id.rizaldo.ui.view.auth.navigation.authNavigation
 import id.rizaldo.ui.view.auth.splash.SplashScreen
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {

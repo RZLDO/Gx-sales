@@ -11,25 +11,32 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import id.rizaldo.R
+import id.rizaldo.domain.model.auth.PostSignIn
 import id.rizaldo.ui.component.button.PrimaryButton
 import id.rizaldo.ui.component.textfield.PrimaryTextField
 import id.rizaldo.ui.theme.footerColor
+import id.rizaldo.ui.view.auth.AuthViewModel
 import io.eyram.iconsax.IconSax
 
 @Composable
 fun LoginScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: AuthViewModel = hiltViewModel()
 ){
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +72,9 @@ fun LoginScreen(
             onValueChange ={},
             isPassword = true,
             hint = "OOOOOO")
-        PrimaryButton(text = stringResource(id = R.string.cta_sig_in), icon = R.drawable.icon_login)
+        PrimaryButton(text = stringResource(id = R.string.cta_sig_in), icon = R.drawable.icon_login){
+            viewModel.signIn(data = PostSignIn("admin@globalxtreme.net", "admingx2023"))
+        }
         Spacer(modifier = Modifier.weight(1f))
         Text(text = stringResource(id = R.string.sign_in_footer), style = MaterialTheme.typography.bodySmall.copy(
             color = footerColor
