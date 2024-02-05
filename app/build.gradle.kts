@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -15,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField(name = "BASE_API_URL", type = "String", value = "\"https://phplaravel-918600-4275378.cloudwaysapps.com/api/\"")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -30,13 +33,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -47,9 +51,15 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
+    val daggerHiltVers = "2.49"
+    val retrofitVersion = "2.9.0"
+    val loggingInterceptorVersion = "5.0.0-alpha.11"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -75,4 +85,23 @@ dependencies {
     //material 3
     implementation("androidx.compose.material3:material3:1.2.0-rc01")
     implementation("io.github.being-eyram:iconsax-android:1.0.0")
+    // data Store
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    // Compose View Model
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-alpha01")
+    // Network
+    implementation("com.google.dagger:hilt-android:$daggerHiltVers")
+    kapt("com.google.dagger:hilt-android-compiler:$daggerHiltVers")
+    // Hilt Navigation
+    implementation("androidx.hilt:hilt-navigation-fragment:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0-beta01")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion")
+
+    //Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }
