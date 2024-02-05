@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">gxsalesaoos</string>
+    <string name="cta_sig_in">Sign In</string>
+    <string name="text_email">Email</string>
+    <string name="text_password">Password</string>
+    <string name="email_placeholder">e.g john@example.com</string>
+    <string name="password_placeholder">OOOO</string>
+    <string name="sign_in_footer">GlobalXtreme © 2023 - V10.0</string>
 </resources>

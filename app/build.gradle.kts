@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "id.rizaldo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "id.rizaldo"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -66,4 +66,13 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Coil Image
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    //Navigation Compose
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+    //material 3
+    implementation("androidx.compose.material3:material3:1.2.0-rc01")
+    implementation("io.github.being-eyram:iconsax-android:1.0.0")
 }
