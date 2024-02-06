@@ -6,4 +6,6 @@
     <string name="email_placeholder">e.g john@example.com</string>
     <string name="password_placeholder">OOOO</string>
     <string name="sign_in_footer">GlobalXtreme © 2023 - V10.0</string>
+    <string name="error_text_email">Pastikan format email kamu sudah benar</string>
+    <string name="error_empty_text">Isian ini tidak boleh kosong</string>
 </resources>

@@ -4,9 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import id.rizaldo.data.ApiResponse
 import id.rizaldo.domain.model.auth.PostSignIn
 import id.rizaldo.domain.usecase.auth.AuthUseCase
 import id.rizaldo.ui.view.auth.extension.AuthUiState
+import id.rizaldo.ui.view.auth.extension.failure
+import id.rizaldo.ui.view.auth.extension.loading
+import id.rizaldo.ui.view.auth.extension.loginSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,7 +27,18 @@ class AuthViewModel @Inject constructor(
     fun signIn(data : PostSignIn){
         viewModelScope.launch {
             useCase.signIn(data).collect{
-                Log.d("result login", it.toString())
+                when(it){
+                    is ApiResponse.Loading -> {
+                        loading()
+                    }
+                    is ApiResponse.CustomError -> {
+                        failure()
+                    }
+                    is ApiResponse.Success -> {
+                        loginSuccess()
+                    }
+                    else -> {}
+                }
             }
         }
     }
