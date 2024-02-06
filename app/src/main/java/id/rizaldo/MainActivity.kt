@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.rizaldo.ui.theme.GxsalesaoosTheme
 import id.rizaldo.ui.view.auth.navigation.authNavigation
 import id.rizaldo.ui.view.auth.splash.SplashScreen
+import id.rizaldo.ui.view.home.navigation.homeNavigation
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         navController = navController, startDestination =  "AuthRoute"){
                         authNavigation(navController)
+                        homeNavigation(navController)
                     }
                 }
             }

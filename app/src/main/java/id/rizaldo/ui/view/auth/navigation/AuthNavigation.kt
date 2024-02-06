@@ -10,7 +10,7 @@ import id.rizaldo.ui.view.auth.splash.SplashScreen
 fun NavGraphBuilder.authNavigation(navController: NavController){
     navigation(startDestination = AuthNavigationRoute.SplashScreen.route , route = "AuthRoute"){
         composable(AuthNavigationRoute.SplashScreen.route){
-            SplashScreen(navController)
+            SplashScreen(navController = navController)
         }
         composable(AuthNavigationRoute.LoginScreen.route){
             LoginScreen(navController = navController)

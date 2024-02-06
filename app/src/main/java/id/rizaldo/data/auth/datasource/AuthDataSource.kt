@@ -1,5 +1,6 @@
 package id.rizaldo.data.auth.datasource
 
+import id.rizaldo.config.UserTokenManager
 import id.rizaldo.data.ApiResponse
 import id.rizaldo.data.auth.response.LoginResponse
 import id.rizaldo.domain.model.auth.PostSignIn
@@ -18,12 +19,14 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthDataSource @Inject constructor(
-    private val service: AuthService
+    private val service: AuthService,
+    private val dataStore : UserTokenManager
 ) {
     fun signIn(data : PostSignIn) : Flow<ApiResponse<LoginResponse>> = flow {
         val result = try{
             val response = service.signIn(data)
             if(response.status == "success"){
+                dataStore.storeUserToken(response.token)
                 ApiResponse.Success(response)
             }else{
                 throw GenericError.FetchFailed()

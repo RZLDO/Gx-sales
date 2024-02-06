@@ -1,23 +1,36 @@
 package id.rizaldo.ui.view.auth.splash
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import id.rizaldo.ui.view.auth.AuthViewModel
 import id.rizaldo.ui.view.auth.navigation.AuthNavigationRoute
+import id.rizaldo.ui.view.home.navigation.HomeNavigationRoute
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
+    authViewModel: AuthViewModel = hiltViewModel(),
     navController: NavController
 ){
     LaunchedEffect(true) {
+        val token = authViewModel.getUserToken()
         delay(3000)
-        navController.navigate(AuthNavigationRoute.LoginScreen.route)
+        Log.d("token", token.toString())
+        if (token == null) {
+            navController.navigate(AuthNavigationRoute.LoginScreen.route)
+        } else {
+            navController.navigate(HomeNavigationRoute.HomeScreen.route)
+        }
     }
     Box(
         contentAlignment = Alignment.Center,

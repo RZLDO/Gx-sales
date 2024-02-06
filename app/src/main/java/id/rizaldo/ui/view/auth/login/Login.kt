@@ -35,6 +35,7 @@ import id.rizaldo.ui.theme.footerColor
 import id.rizaldo.ui.view.auth.AuthViewModel
 import id.rizaldo.ui.view.auth.extension.validateEmail
 import id.rizaldo.ui.view.auth.extension.validatePassword
+import id.rizaldo.ui.view.home.navigation.HomeNavigationRoute
 import io.eyram.iconsax.IconSax
 
 @Composable
@@ -53,7 +54,7 @@ fun LoginScreen(
         mutableStateOf("")
     }
     if(uiState.value.isSuccess){
-        navController.navigate("")
+        navController.navigate(HomeNavigationRoute.HomeScreen.route)
     }
     Column (
         modifier = Modifier
