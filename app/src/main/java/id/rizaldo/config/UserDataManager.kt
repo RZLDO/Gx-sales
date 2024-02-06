@@ -24,9 +24,9 @@ class UserTokenManager(private val context: Context) {
             it[USER_TOKEN] = token
         }
     }
-    fun readUserToken(): Flow<String?> {
+    fun readUserToken(): Flow<String> {
         return context.dataStore.data.map {preference ->
-            preference[USER_TOKEN]
+            preference[USER_TOKEN] ?: ""
         }
     }
     suspend fun deleteUserToken() {
