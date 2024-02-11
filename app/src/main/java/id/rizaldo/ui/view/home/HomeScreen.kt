@@ -27,6 +27,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import id.rizaldo.R
@@ -35,12 +37,15 @@ import id.rizaldo.ui.theme.neutral300
 import id.rizaldo.ui.theme.neutral40
 import id.rizaldo.ui.theme.neutral400
 import id.rizaldo.ui.theme.primaryColor
+import id.rizaldo.ui.view.profile.ProfileViewModel
 import io.eyram.iconsax.IconSax
 
 @Composable
 fun HomeScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel : ProfileViewModel = hiltViewModel()
 ){
+    val profileUiState = viewModel.uiState.collectAsStateWithLifecycle()
     Column {
         Row(
             modifier  = Modifier
@@ -57,10 +62,10 @@ fun HomeScreen(
                     .width(45.dp)
                     .clip(shape = CircleShape))
             Column {
-                Text(text = "Rizaldo setiawan", style =MaterialTheme.typography.bodyLarge.copy(
+                Text(text = profileUiState.value.profileData.name, style =MaterialTheme.typography.bodyLarge.copy(
 
                 ))
-                Text(text = "email",style =MaterialTheme.typography.bodySmall.copy(
+                Text(text = profileUiState.value.profileData.email,style =MaterialTheme.typography.bodySmall.copy(
                     fontSize = 10.sp
                 ))
             }
@@ -86,15 +91,17 @@ fun HomeScreen(
         }
         LazyVerticalGrid(
             columns =  GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize().padding(start = 16.dp, end = 16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 16.dp, end = 16.dp),
         ) {
             items(4){
                 Box(
-                   modifier =  Modifier
+                   modifier = Modifier
                        .padding(8.dp)
-                    .fillMaxWidth()
-                    .border(width = 1.dp, color = neutral400, shape = RoundedCornerShape(9.dp))
-                    .padding(16.dp)
+                       .fillMaxWidth()
+                       .border(width = 1.dp, color = neutral400, shape = RoundedCornerShape(9.dp))
+                       .padding(16.dp)
                 ){
                     Column {
                         Text(text = "15", style = MaterialTheme.typography.titleLarge.copy(

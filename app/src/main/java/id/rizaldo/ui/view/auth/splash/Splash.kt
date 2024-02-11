@@ -26,7 +26,7 @@ fun SplashScreen(
         val token = authViewModel.getUserToken()
         delay(3000)
         Log.d("token", token.toString())
-        if (token == null) {
+        if (token.isNullOrEmpty()) {
             navController.navigate(AuthNavigationRoute.LoginScreen.route)
         } else {
             navController.navigate(HomeNavigationRoute.HomeScreen.route)

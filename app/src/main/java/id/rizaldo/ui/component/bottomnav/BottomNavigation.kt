@@ -7,6 +7,7 @@ import id.rizaldo.ui.theme.neutral500
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
@@ -42,7 +43,7 @@ fun BottomNavigationBar(
     NavigationBar(
         containerColor = Color.White,
         modifier = modifier) {
-        navigationsItem.forEachIndexed { _, navigationItem ->
+        navigationsItem.forEachIndexed { index, navigationItem ->
             NavigationBarItem(
                 label = {
                     Text(text = stringResource(id = navigationItem.title),
@@ -79,6 +80,9 @@ fun BottomNavigationBar(
                     disabledTextColor = blackColor
                 )
             )
+            if(index == 1){
+                Spacer(modifier = Modifier.weight(1f))
+            }
         }
 
     }
